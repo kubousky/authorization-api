@@ -4,6 +4,7 @@ services:
     app:
         build:
             context: .
+            dockerfile: Dockerfile
             args:
                 - DEV=true
         ports:
@@ -19,6 +20,7 @@ services:
             - DB_NAME=devdb
             - DB_USER=devuser
             - DB_PASS=changeme
+            - DEBUG=1
         depends_on:
             - db
 
