@@ -10,7 +10,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ['email', 'name']
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-    #     (_('Personal info'), {'fields': ('name',)}),
+        # (_('Personal info'), {'fields': ('name',)}),
         (
             _('Permissions'),
             {'fields': (
@@ -34,6 +34,7 @@ class UserAdmin(BaseUserAdmin):
                 'is_superuser')
         }),
     )
+
 
 admin.site.register(models.User, UserAdmin)
 # admin.site.register(models.TagPrivate)

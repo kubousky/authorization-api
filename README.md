@@ -1,6 +1,7 @@
-
+# everytime we changerequirements.txt / Dockerfile / docker-compose.yml
 docker-compose build
 
+# up
 docker-compose up
 
 # up, start and remove

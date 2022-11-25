@@ -1,12 +1,10 @@
-from django.contrib.auth import  (
+from django.contrib.auth import (
     get_user_model,
     authenticate
 )
-from django.contrib.auth.password_validation import validate_password
-from django.core import exceptions
-from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
+
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -19,9 +17,9 @@ class UserSerializer(serializers.ModelSerializer):
         """Create and return a user with encrypted password."""
         return get_user_model().objects.create_user(**validated_data)
 
-    def update(self, instance, validated_data): # a user instance
-        """Update a user, setting the password correctly and return it (the user)"""
-        password = validated_data.pop('password', None) # remove pw
+    def update(self, instance, validated_data):  # a user instance
+        """Update a user, setting the password correctly"""
+        password = validated_data.pop('password', None)  # remove pw
         user = super().update(instance, validated_data)
 
         if password:
@@ -39,7 +37,7 @@ class AuthTokenSerializer(serializers.Serializer):
         trim_whitespace=False,
     )
 
-    def validate(self,attrs):
+    def validate(self, attrs):
         """Validate and authenticate the user"""
         email = attrs.get('email')
         password = attrs.get('password')

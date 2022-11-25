@@ -12,13 +12,15 @@ CREATE_USER_URL = reverse('user:create')
 TOKEN_URL = reverse('user:token')
 ME_URL = reverse('user:me')
 
+
 def create_user(**param):
     """Create and return a new user."""
     return get_user_model().objects.create_user(**param)
 
 
 class PublicUserApiTests(TestCase):
-    """Test the public features of the user API""" #authentication not required
+    """Test the public features of the user API"""
+    # authentication not required
 
     def setUp(self):
         self.client = APIClient()
