@@ -1,5 +1,7 @@
-# everytime we changerequirements.txt / Dockerfile / docker-compose.yml
+# everytime we change requirements.txt / Dockerfile / docker-compose.yml
 docker-compose build
+# then check
+docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test && flake8"
 
 # up
 docker-compose up

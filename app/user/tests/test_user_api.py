@@ -4,7 +4,6 @@ Tests for the user API.
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-
 from rest_framework.test import APIClient
 from rest_framework import status
 
@@ -35,7 +34,7 @@ class PublicUserApiTests(TestCase):
         res = self.client.post(CREATE_USER_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-        # retrieve the user object from the db with we posted with the payload:
+        # retrieve the user object from the db with posted payload:
         user = get_user_model().objects.get(email=payload['email'])
         self.assertTrue(user.check_password(payload['password']))
         self.assertNotIn('password', res.data)
