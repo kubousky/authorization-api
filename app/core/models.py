@@ -7,6 +7,7 @@ from django.contrib.auth.models import (
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.conf import settings
 
+
 class UserManager(BaseUserManager):
     """Manager for user."""
 
@@ -55,7 +56,9 @@ class Dot(models.Model):
     description = models.TextField(max_length=350, blank=True)
     lon = models.IntegerField()
     lat = models.IntegerField()
-    rating = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
+    rating = models.FloatField(
+                    validators=[MinValueValidator(0.0),
+                                MaxValueValidator(5.0)])
     link = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
