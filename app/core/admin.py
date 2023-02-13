@@ -38,4 +38,4 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(models.User, UserAdmin)
 # admin.site.register(models.TagPrivate)
-# admin.site.register(models.DotPrivate)
+admin.site.register(models.Dot)

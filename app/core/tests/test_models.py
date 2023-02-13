@@ -1,11 +1,23 @@
+"""
+Tests for models.
+"""
+from decimal import Decimal
+
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
+from core import models
+
+# def create_user(email='user@example.com', password='testpass123'):
+#     """Helper function to create and return a test user"""
+#     return get_user_model().objects.create_user(email, password)
+
 
 class ModelTests(TestCase):
+    """Test models."""
 
     def test_create_user_with_email_succesful(self):
-        """Test creating a user with an email is succesful."""
+        """Test creating a user with an email is successful."""
         email = 'test@example.com'
         password = 'Testpass123'
         user = get_user_model().objects.create_user(
@@ -42,3 +54,20 @@ class ModelTests(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_create_dot(self):
+        """Test create a dot is successfull."""
+        user = get_user_model().objects.create_user(
+            'test@example.com',
+            'test123',
+        )
+        dot = models.Dot.objects.create(
+            user=user,
+            name='Mont Everest',
+            public=False,
+            lon=1.123,
+            lat=2.123,
+            rating=4.9,
+            description='The highest montain.',
+        )
+        self.assertEqual(str(dot), dot.name)
