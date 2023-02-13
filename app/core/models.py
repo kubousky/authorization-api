@@ -4,6 +4,8 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin
 )
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.conf import settings
 
 
 class UserManager(BaseUserManager):
@@ -40,3 +42,24 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+
+class Dot(models.Model):
+    """DotPrivate object."""
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='dots_private',
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=255)
+    public = models.BooleanField(default=False)
+    description = models.TextField(max_length=350, blank=True)
+    lon = models.IntegerField()
+    lat = models.IntegerField()
+    rating = models.FloatField(
+                    validators=[MinValueValidator(0.0),
+                                MaxValueValidator(5.0)])
+    link = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.name
